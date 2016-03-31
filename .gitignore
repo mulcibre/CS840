@@ -13,3 +13,6 @@
 
 #ignore benchmaker source files
 project 3/benchmaker/**/*.cpp
+
+#Matlab autosave files
+*.asv

@@ -1,3 +1,4 @@
+% Compares the LLOC data from Benchmaker and CPPparse
 function [  ] = LLOCCompare( dataClasses )
     figure('Position', [0, 0, 1280, 720]);
     h = plot([dataClasses.BMspecPLOC], [[dataClasses.LLOC];...

@@ -1,3 +1,4 @@
+% determines coefficient values for fit curve for compilation times and saves result
 function [] = compileTimeLLOCmodel(times, LLOC)
     xdata = LLOC;
     ydata = times;

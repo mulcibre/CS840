@@ -1,3 +1,4 @@
+%   Compares raw data and best fit line to another best fit line
 function [] = compareCompilerData(otherData1, otherData2, titleSet, xlabelSet, ylabelSet,fn, BMcoeff)
     figure('Position', [0, 0, 1280, 720]);
     x1 = otherData1;

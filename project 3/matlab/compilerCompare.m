@@ -1,4 +1,5 @@
 function [] = compilerCompare()
+    %   All results from compiled program execution tests
     VSMMDebugTime = 0.533731;
     VSMMReleaseTime = 0.0985869;
     VSQSDebugTime = 1.7019;

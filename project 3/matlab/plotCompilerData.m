@@ -1,3 +1,4 @@
+% returns regression fit line coefficients, and generates graph of raw data versus fit line
 function [coeffs] = plotCompilerData(dataClass1,dataClass2, titleSet, xlabelSet, ylabelSet,fn)
     
     x = dataClass1;

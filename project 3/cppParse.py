@@ -1,4 +1,3 @@
-#sam is the master
 import re,glob
 #import pdb; pdb.set_trace()
 from enum import Enum
@@ -163,8 +162,8 @@ def getCounts(filepath):
     outStr += str(logANDCount)+ ','
     outStr += str(logORCount)+ ','
     outStr += str(PLOC)+ ','
-    outStr += str(LLOC)+ ','
     outStr += str(cyclomaticComplexity) + '\n'
+    outStr += str(LLOC)+ ','
 
     return outStr
 
