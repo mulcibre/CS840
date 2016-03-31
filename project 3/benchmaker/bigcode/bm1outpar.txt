@@ -1,0 +1,10 @@
+     BM1bigcode1.cpp     10000     10000     16102
+     BM1bigcode2.cpp     20000     20006     32226
+     BM1bigcode3.cpp     30000     29999     48325
+     BM1bigcode4.cpp     40000     39997     64441
+     BM1bigcode5.cpp     50000     50007     80572
+     BM1bigcode6.cpp     60000     59994     96668
+     BM1bigcode7.cpp     70000     70002    112805
+     BM1bigcode8.cpp     80000     80012    128930
+     BM1bigcode9.cpp     90000     90005    145022
+    BM1bigcode10.cpp    100000     99994    161140

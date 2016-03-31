@@ -1,0 +1,6 @@
+Sun 02-14-2016@23-54-01.13 
+
+Pinging ssel.caltech.edu [131.215.22.147] with 32 bytes of data:
+
+Ping statistics for 131.215.22.147:
+    Packets: Sent = 139, Received = 0, Lost = 139 (100% loss),

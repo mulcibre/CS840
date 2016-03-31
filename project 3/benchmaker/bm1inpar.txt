@@ -1,0 +1,11 @@
+ARITHMETIC  1
+IF          1
+IF_ELSE     1
+SWITCH      1
+WHILE       1
+DO          1
+FOR         1
+LLOCperFUN  100
+LLOCmin     200
+LLOCmax     5000
+LLOCstep    240

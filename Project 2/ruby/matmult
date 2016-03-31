@@ -1,0 +1,47 @@
+#   Samuel Gluss
+#   Jozo Dujmovic
+#   CS840 Project 2
+#   Evaluation of Memory Access patterns
+#   In Matrix Multiplication Performance
+#   Ruby
+
+durations = Array.new
+#   test NxN matrices from 20x20 to 500x500 in step size 20
+(20..500).step(20).each do |matSize|
+  #   number of times to repeat test at each size to minimize timer error, minimum of 1
+  repCount = 3 + (250**3 / matSize**3).floor
+
+  startTime = Time.new
+  (0...repCount).each do
+
+    #   Matrix initialization
+    a = Array.new(matSize) { Array.new(matSize) }
+    b = Array.new(matSize) { Array.new(matSize) }
+    c = Array.new(matSize) { Array.new(matSize) }
+    (0...matSize).each do |i|
+      (0...matSize).each do |j|
+        if i == j
+          a[i][j] = 2.002
+          b[i][j] = 2.002
+        else
+          a[i][j] = 1.001
+          b[i][j] = 1.001
+        end
+        c[i][j] = 0.0
+      end
+    end
+
+    #   Matrix multiplication op
+    (0...matSize).each do |k|
+      (0...matSize).each do |j|
+        (0...matSize).each do |i|
+          c[j][i] += a[k][i]*b[j][k]
+        end
+      end
+    end
+  end
+  #   calculate and append duration of test
+  endTime = Time.new
+  durations << ((endTime.to_f - startTime.to_f) / repCount)
+end
+puts durations.join(',')

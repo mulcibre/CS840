@@ -1,0 +1,14 @@
+Wed 02-10-2016@20-54-40.50 
+
+Pinging google.com [74.125.224.9] with 32 bytes of data:
+Reply from 74.125.224.9: bytes=32 time=5ms TTL=55
+Reply from 74.125.224.9: bytes=32 time=5ms TTL=55
+Reply from 74.125.224.9: bytes=32 time=5ms TTL=55
+Reply from 74.125.224.9: bytes=32 time=5ms TTL=55
+Reply from 74.125.224.9: bytes=32 time=5ms TTL=55
+
+Ping statistics for 74.125.224.9:
+    Packets: Sent = 5, Received = 5, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 5ms, Maximum = 5ms, Average = 5ms
+Wed 02-10-2016@20-54-40.50

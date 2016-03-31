@@ -1,0 +1,7 @@
+ping www.uni-stuttgart.de.edu
+ping www.uni-hamburg.de.edu
+ping turing.caltech.edu
+ping daffodilvarsity.edu.bd
+ping www.imi.kiev.ua
+ping www.fujita-hu.ac.jp
+ping www.sapporo-u.ac.jp
