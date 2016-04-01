@@ -2,14 +2,14 @@ import os,sys,glob,Image
 #import pdb; pdb.set_trace()
 
 #   how much to crop from sides/top
-leftChop = 145
-rightChop = 145
-topChop = 45
-BottomChop = 45
+leftChop = 190
+rightChop = 175
+topChop = 65
+BottomChop = 75
 
 #   Where to begin and stop removing columns
-sliceStart = 870
-sliceEnd = 950
+sliceStart = 1005
+sliceEnd = 1125
 diff = sliceEnd - sliceStart
 
 #   load all files in current directory with .png extension

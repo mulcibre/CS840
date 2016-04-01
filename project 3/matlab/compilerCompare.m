@@ -22,6 +22,28 @@ function [] = compilerCompare()
     T420GCCQSDebugTime = 1.89384;
     T420GCCQSReleaseTime = 1.23864;
     
+    %   create barplot
+    figure('Position', [0, 0, 1280, 720]);
+    subplot(2,1,1);
+    %   initialize plot with W541 Data
+    bar([VSMMDebugTime,VSMMReleaseTime,VSQSDebugTime,VSQSReleaseTime,...
+        GCCMMDebugTime,GCCMMReleaseTime,GCCQSDebugTime,GCCQSReleaseTime],'g');   
+    %      Set labels for bars 
+    set(gca,'xticklabel',{'VSMMDebug';'VSMMRelease';'VSQSDebug';'VSQSRelease';...
+        'GCCMMDebug';'GCCMMRelease';'GCCQSDebug';'GCCQSRelease'});
+     title('Executable Runtimes for W541');
+    ylabel('Runtime (s)');
+    
+    subplot(2,1,2);
+    %   initialize plot with T420 Data
+    bar([T420VSMMDebugTime,T420VSMMReleaseTime,T420VSQSDebugTime,T420VSQSReleaseTime,...
+        T420GCCMMDebugTime,T420GCCMMReleaseTime,T420GCCQSDebugTime,T420GCCQSReleaseTime],'g');
+    %      Set labels for bars 
+    set(gca,'xticklabel',{'VSMMDebug';'VSMMRelease';'VSQSDebug';'VSQSRelease';...
+        'GCCMMDebug';'GCCMMRelease';'GCCQSDebug';'GCCQSRelease'});
+     title('Executable Runtimes for T420s');
+    ylabel('Runtime (s)');
+    
     %   get ratios of performance between compilers
     MMDebugRatio = VSMMDebugTime / GCCMMDebugTime;
     MMReleaseRatio = VSMMReleaseTime / GCCMMReleaseTime;

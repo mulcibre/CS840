@@ -27,6 +27,6 @@ xlabel('Matrix Size (NxN)');
 
 %   outputing data to disk
 wd = fileparts(mfilename('fullpath'));
-set(gcf,'PaperUnits','inches','PaperPosition',[0 0 12 7])
+set(gcf,'PaperUnits','inches','PaperPosition',[0 0 14 9])
 print([wd '\figures\' object.title 'bestworstQfactor'],'-dpng','');
 end

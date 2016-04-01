@@ -8,23 +8,28 @@ wd = fileparts(mfilename('fullpath'));
 %   get outfile directory
 dataDir = [wd '\outfiles\test0\'];
 procDataDir = [wd '\outfiles\3-13-2016 100min\'];
+cppreleaseDir = [wd '\outfiles\cpprelease\'];
 opLabelsDir = [wd '\createLabels\'];
 
 %   read delimited data files into matrices
 javaData = dlmread([procDataDir 'javaoutfile.txt']);
-cppData = dlmread([procDataDir 'c++outfile.txt']);
+cppDebugData = dlmread([procDataDir 'c++outfile.txt']);
+cppRelData = dlmread([cppreleaseDir 'c++outfile.txt']);
 rubyData = dlmread([dataDir 'Rubyoutfile.txt']);
 jsData = dlmread([dataDir 'JSoutfile.txt']);
 pythonData = dlmread([dataDir 'Pythonoutfile.txt']);
 
+% put data sets into objects with names
 classJavaData = dataSet('Java', javaData);
-classCppData = dataSet('C++', cppData);
+classCppDebugData = dataSet('C++ Debug Mode', cppDebugData);
+classCppRelData = dataSet('C++ Release Mode', cppRelData);
 classRubyData = dataSet('Ruby', rubyData);
 classJSData = dataSet('JS', jsData);
 classPythonData = dataSet('Python', pythonData);
 
 objects = [classJavaData 
-           classCppData
+           classCppDebugData
+           classCppRelData
            classRubyData 
            classJSData
            classPythonData];
@@ -41,7 +46,7 @@ matSizes = 20:20:500;
 
 %   plotting all data gathered for one language
 figure
-object = classJSData;
+object = classCppRelData;
 plot(matSizes, object.rawData');
 ax = gca;
 ax.XTick = 20:40:500;
@@ -63,7 +68,7 @@ title('Q factors for Matrix Multiplication');
     
     %   side by side display of best/worst data and Qfactor
     for i = 1:length(objects)
-        %bestWorstAndQfactor(objects(i),matSizes, opLabels)
+        bestWorstAndQfactor(objects(i),matSizes, opLabels)
     end
     
 %   closing all files

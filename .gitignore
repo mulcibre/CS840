@@ -16,3 +16,6 @@ project 3/benchmaker/**/*.cpp
 
 #Matlab autosave files
 *.asv
+
+#no need to track pdf files
+*.pdf
