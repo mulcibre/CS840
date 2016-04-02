@@ -168,7 +168,7 @@ def getCounts(filepath):
 
 #   get list of cpp files
 cppFiles = []
-for file in glob.glob("benchmaker/*.cpp"):
+for file in glob.glob("cppFiles/*.cpp"):
     cppFiles.append(file)
 
 #   clear outfile
@@ -179,6 +179,6 @@ for file in cppFiles:
         #   The below line of code seeks to the end of the outfile
         outfile.seek( 0, 2 )
         #   get benchmark number
-        fileNo = re.findall('(?<!BM)[0-9]+',file)
+        fileNo = re.findall('([0-9]+)\.cpp',file)
         outfile.write(fileNo[0] + ',')
         outfile.write(getCounts(file))
