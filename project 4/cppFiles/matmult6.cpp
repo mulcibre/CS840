@@ -62,7 +62,7 @@ int main()
 	}
 	stopTime = chrono::steady_clock::now();
 	multTime = chrono::duration_cast<chrono::duration<double>>(stopTime - startTime).count() / multRepCount;
-
+    
 	//	clean memory
 	for (int i = 0; i < rowCount; i++) {
 		delete[] a[i];

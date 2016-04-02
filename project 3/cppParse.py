@@ -1,10 +1,10 @@
 import re,glob
-#import pdb; pdb.set_trace()
+import pdb; pdb.set_trace()
 from enum import Enum
 
 outputFilename = 'outfile.txt'
 
-cppTypes = '(long\slong|long\sdouble|long\sint|char|bool|short|int|long|float|double)'
+cppTypes = '(long\slong|long\sdouble|long\sint|char|bool|short|int|long|float|double|time_point)'
 controls = '(for|while|if)'
 
 class State(Enum):
@@ -99,6 +99,18 @@ def stripBrackets(source):
             retVal.append(character)
     return(''.join(retVal))
 
+def stripParen(source):
+    retVal = []
+    parenLevel = 0
+    for character in source:
+        if character == '(':
+            parenLevel += 1
+        elif character == ')':
+            parenLevel -= 1
+        elif parenLevel == 0:
+            retVal.append(character)
+    return(''.join(retVal))
+    
 def getCounts(filepath):
     with open(filepath,'r') as f:
         code = f.read()
@@ -123,19 +135,22 @@ def getCounts(filepath):
     funcCount = len(funcs)
 
     #   only get logical AND OR inside control statements, switch cases
-    matches = re.findall(controls+'\s*([^)]+)',code)
+    matches = re.findall('(' + controls+'\s*\([^\)]+\))',code)
     logANDCount = 0
     logORCount = 0
     for match in matches:
-        logANDCount += match.count('&&')
-        logORCount += match.count('||')
+        logANDCount += match[0].count('&&')
+        logORCount += match[0].count('||')
 
+    # TODO: something is broken with this regex for human code
     #   get all lines where variables are defined or initialized
-    matches = re.findall('('+cppTypes+'\s+[^;\{\}]+;)',code)
+    matches = re.findall('[^a-zA-Z0-9]+('+cppTypes+'[\*]*\s+[^;\{\}]+;)',code)
     commas = 0
     equals = 0
     for match in matches:
-        match = stripBrackets(match)
+        #   strip brackets and parens so contents aren't included
+        match = stripBrackets(match[0])
+        match = stripParen(match)
         commas += match.count(',')
         equals += match.count('=')
 
@@ -179,6 +194,6 @@ for file in cppFiles:
         #   The below line of code seeks to the end of the outfile
         outfile.seek( 0, 2 )
         #   get benchmark number
-        fileNo = re.findall('(?<!BM)[0-9]+',file)
+        fileNo = re.findall('([0-9]+)\.cpp',file)
         outfile.write(fileNo[0] + ',')
         outfile.write(getCounts(file))
