@@ -12,7 +12,9 @@ LLOC = cell2mat({LLOCData})';
 data = horzcat(V, LLOC)';
 
 %   row names
-rNames = {'program1';'program2';'program3';'program4';'program5'}';
+rNames = {'Plateau';'Parabolic Approximation';'Array Processing';...
+    'Big Integers';'Iteration vs. Recursion';'Matrix Multiplication';...
+    'QuickSort';'Matrix Inversion'}';
 
 %   column labels
 cNames = {  'V';'LLOC'};
@@ -22,7 +24,7 @@ cNames = {  'V';'LLOC'};
 cNames = strcat(htmlFSInc,cNames);
 rNames = strcat(htmlFSInc,rNames);
 
-f = figure;
+f = figure('Position', [0, 0, 1280, 720]);
 t = uitable(f,'Data',data',...
     'ColumnName',cNames,...
     'RowName',rNames,...
@@ -30,6 +32,10 @@ t = uitable(f,'Data',data',...
 % Set width and height
 t.Position(3) = t.Extent(3);
 t.Position(4) = t.Extent(4);
+
+%   Change figure dimensions so table can be saved correctly
+f.Position(3) = t.Extent(3)+20;
+f.Position(4) = t.Extent(4)+20;
 
 %   The below code requires the findjobj function
 %   download it here: http://www.mathworks.com/matlabcentral/fileexchange/14317-findjobj-find-java-handles-of-matlab-graphic-objects
@@ -41,5 +47,17 @@ cellStyle.setHorizontalAlignment(cellStyle.CENTER);
 
 % Table must be redrawn for the change to take affect
 jTable.repaint;
+
+%   outputing data to disk
+    pixperinch = get(0,'ScreenPixelsPerInch');
+    wd = fileparts(mfilename('fullpath'));
+    figDir = [wd '\..\figures\tables\'];
+    %   dimensions must account for figure position
+    set(gcf,'PaperUnits','inches','PaperPosition',...
+        [0 0 (t.Extent(3)+t.Position(1))/pixperinch (t.Extent(4)+t.Position(2))/pixperinch])
+    
+    %   output will still have margins on left and bottom, these must be
+    %   trimmed
+    print([figDir 'LLOCVTable'],'-dpng','');
 
 end

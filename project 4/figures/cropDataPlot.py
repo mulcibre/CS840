@@ -3,7 +3,7 @@
 #   latest update 4-2-2016
 #   added edge detection and auto cropping
 #   Set padding around figure below:
-    padding = 10
+padding = 10
 
 import os,sys,glob,Image
 #import pdb; pdb.set_trace()

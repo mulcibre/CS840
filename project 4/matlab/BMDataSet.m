@@ -14,12 +14,6 @@ classdef BMDataSet
         PLOC
         LLOC
         cyclomaticComplexity
-        BMspecPLOC
-        BMactualPLOC
-        BMactualLLOC
-        sizeofCPP
-        sizeofEXE
-        compileTime
     end
     
     methods
@@ -39,12 +33,6 @@ classdef BMDataSet
             obj.PLOC = data(12);
             obj.LLOC = data(13);
             obj.cyclomaticComplexity = data(14);
-            obj.BMspecPLOC = data(16);
-            obj.BMactualPLOC = data(17);
-            obj.BMactualLLOC = data(18);
-            obj.sizeofCPP = data(19);
-            obj.sizeofEXE = data(20);
-            obj.compileTime = data(21);
         end
     end
 end
