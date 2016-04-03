@@ -119,28 +119,3 @@ int main()
 	system("pause");
 	return 0;
 }
-
-/*
-Testing results:
-Wall power, Debug:
-Duration of iterative searches: 1.279s
-Duration of recursive searches: 2.26102s
-
-Battery power, Debug:
-Duration of iterative searches: 4.52251s
-Duration of recursive searches: 8.11001s
-
-Wall power, Release:
-Duration of iterative searches: 0.787007s
-Duration of recursive searches: 0.0200001s
-
-Battery power, Release
-Duration of iterative searches: 2.1s
-Duration of recursive searches: 0.0800001s
-
-Obviously, the laptop runs at full speed with wall power, so the run times are quite a bit shorter.
-The release build also runs faster than debug, due to the compiler optimizations, and reduced overhead.
-The result that came as a surprise was how much faster the recursive solution became, increasing in speed
-tenfold from debug to release. The result is that in release, recursive search is more performant than
-iterative search by a good margin.
-*/

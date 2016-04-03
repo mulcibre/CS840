@@ -1,7 +1,7 @@
 #   Image Cropping Utility
 #   Samuel Gluss
 #   latest update 4-2-2016
-#   added edge detection and auto cropping
+#   added edge detection and auto cropping with out-of-bounds protection
 #   Set padding around figure below:
 padding = 10
 
@@ -25,11 +25,16 @@ def getEdge(image, thresh, oBeg, oEnd, iBeg, iEnd, findX):
 def findEdges(image, edges, imageWidth, imageHeight):
     imageWidth -= 1
     imageHeight -= 1
+    #   maximum value considered to be non-white
     threshold = 250
     
+    #   scan right to get left edge
     edges[0] = getEdge(image, threshold,0,imageWidth,0,imageHeight,True)
+    #   scan left to get right edge
     edges[1] = getEdge(image, threshold,imageWidth,0,0,imageHeight,True)
+    #   scan down to get top edge
     edges[2] = getEdge(image, threshold,0,imageHeight,0,imageWidth,False)
+    #   scan up to get bottom edge
     edges[3] = getEdge(image, threshold,imageHeight,0,0,imageWidth,False)
     
     return edges
@@ -54,5 +59,11 @@ for image in imageFiles:
     rCrop = edges[1] + padding
     tCrop = edges[2] - padding
     bCrop = edges[3] + padding
+    
+    #   protect against out-of-bounds
+    lCrop = lCrop if lCrop > 0 else 0
+    rCrop = rCrop if rCrop < w else w
+    tCrop = tCrop if tCrop > 0 else 0
+    bCrop = bCrop if bCrop < h else h
     
     imageToResize.crop((lCrop, tCrop, rCrop, bCrop)).save(image)

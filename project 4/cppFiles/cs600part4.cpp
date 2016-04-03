@@ -1,5 +1,4 @@
 //	hmw2part4.cpp : Sam Gluss 10/5/2015
-//	you know it!
 //	CS600 HMW2 Part 4: printing big integers
 
 #include <iostream>

@@ -9,7 +9,7 @@ htmlFSInc = strcat(['<html><font size=+' num2str(labelFontSizeIncrease) '>']);
 V = cell2mat({VData})';
 LLOC = cell2mat({LLOCData})';
 
-data = horzcat(V, LLOC)';
+data = horzcat(LLOC, V)';
 
 %   row names
 rNames = {'Plateau';'Parabolic Approximation';'Array Processing';...
@@ -17,7 +17,7 @@ rNames = {'Plateau';'Parabolic Approximation';'Array Processing';...
     'QuickSort';'Matrix Inversion'}';
 
 %   column labels
-cNames = {  'V';'LLOC'};
+cNames = {'LLOC';'V'};
 
 %   This is a silly trick I learned on the internet
 %   HTML injection works in MatLab
@@ -49,7 +49,9 @@ cellStyle.setHorizontalAlignment(cellStyle.CENTER);
 jTable.repaint;
 
 %   outputing data to disk
+    %   get pixels per inch, for scaling conversion
     pixperinch = get(0,'ScreenPixelsPerInch');
+    %   get output directory
     wd = fileparts(mfilename('fullpath'));
     figDir = [wd '\..\figures\tables\'];
     %   dimensions must account for figure position
@@ -59,5 +61,4 @@ jTable.repaint;
     %   output will still have margins on left and bottom, these must be
     %   trimmed
     print([figDir 'LLOCVTable'],'-dpng','');
-
 end

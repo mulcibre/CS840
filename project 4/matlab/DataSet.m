@@ -1,4 +1,4 @@
-classdef BMDataSet
+classdef DataSet
     properties
         runNum
         commas
@@ -18,7 +18,7 @@ classdef BMDataSet
     
     methods
         % methods, including the constructor are defined in this block
-        function obj = BMDataSet(data)
+        function obj = DataSet(data)
             obj.runNum = data(1);
             obj.commas = data(2);
             obj.equals = data(3);

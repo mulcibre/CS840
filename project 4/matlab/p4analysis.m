@@ -12,11 +12,11 @@ data = dlmread([wd 'outfile.txt']);
 data = sortrows(data);
 
 %   create dataClass array
-dataClasses = BMDataSet.empty();
+dataClasses = DataSet.empty();
 for i = 1:size(data,1)
-    dataClasses(i) = BMDataSet(data(i,:));
+    dataClasses(i) = DataSet(data(i,:));
 end
 
-%project4 LLOC vs V
+%   project4 LLOC vs V
 LLOCV([dataClasses.cyclomaticComplexity], [dataClasses.LLOC])
 VLLOCTable([dataClasses.cyclomaticComplexity], [dataClasses.LLOC])
