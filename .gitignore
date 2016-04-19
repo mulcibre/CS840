@@ -19,3 +19,6 @@ project 3/benchmaker/**/*.cpp
 
 #no need to track pdf files
 *.pdf
+
+#anything to do with jetbrains idea
+.idea/
