@@ -6,35 +6,48 @@
 #
 ####################################
 from costDrivers import Drivers
+from getSWParams import SWParams
 
-LLOC = 1000
+gccPath = "../projectSpecs/gcc.txt"
 
 #   costDrivers.py contains all the cost drivers, modes, and levels of detail for COCOMO
 drs = Drivers()
 
-#   initial selection for all parameters is nominal or middle value
-productAttr = [2,2,2]
-computerAttr = [2,2,2,2]
-personnelAttr = [2,2,2,2,2]
-projectAttr = [2,2,2]
-reqVolatility = 2
-settings = productAttr+computerAttr+personnelAttr+projectAttr+[reqVolatility]
+#    development schedule parameters
+r = 2.5
+s = [0.38,0.35,0.32]
 
-#   mode, level of detail
-COCOparam = [2,2]
+def runCOCOMO(pathToConfig):
+    settings = SWParams(pathToConfig)
 
-#   Compute m as composite of driver files
-m = 1
-m *= drs.computeM(settings)
+    #   Get LLOC from exe size using formula determined in project 3
+    #   Adjust this by a factor of 1000 to get KLLOC
+    KLLOC = (settings.exeSize - 188000) / (28.8314 * 1000)
 
-#   Effort Formula
-a = drs.COCOMOParam[COCOparam[0]][COCOparam[1]][0]
-b = drs.COCOMOParam[COCOparam[0]][COCOparam[1]][1]
+    #   Compute m as composite of driver files
+    m = 1
+    m *= drs.computeM(settings)
 
-Effort = a * (LLOC ** b) * m
+    #   Effort Formula
+    #   Values come from COCOMO Parameters table, indexing on Mode and Level of Detail
+    a = drs.COCOMOParam[settings.mode][settings.levelOfDetail][0]
+    b = drs.COCOMOParam[settings.mode][settings.levelOfDetail][1]
 
-#   Productivity formula
-Productivity = LLOC / Effort
+    Effort = a * (KLLOC ** b) * m
 
-#   Development Schedule Formula
-devTime =
+    #   Productivity formula
+    Productivity = KLLOC / Effort
+
+    #   Development Schedule Formula
+    devTime = r * (Effort ** s[settings.mode])
+
+    #   Average Staffing Formula
+    staffCount = Effort / devTime
+
+    cost = settings.salary * Effort
+
+    #   round cost to nearest cent
+    print " ".join(["The project", settings.name ,"will cost", '$' + str('%.2f'%cost), "to produce"])
+
+#   execute calculations
+runCOCOMO(gccPath)

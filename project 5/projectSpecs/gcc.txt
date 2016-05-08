@@ -1,0 +1,68 @@
+#   Note - parser anchors on comment lines, do NOT edit them
+# Software Name
+GCC compiler
+
+# Executable Size (bytes)
+901120
+
+# Salary ($ per software enginer per month)
+8333
+
+## Level Of Detail (0: m = 1, 1: intermediate1, 2: intermediate2)
+1
+
+##  Mode (organic, semidetached, embedded)
+organic
+
+##  Product Attributes (must be very low, low, nominal, high, very high, or extra high)
+# m1. requiredSoftwareReliability
+very low
+
+# m2. dbSize
+low
+
+# m3. productComplexity
+extra high
+
+#   Computer Attributes
+# m4. executionTimeConstraint
+high
+
+# m5. mainStorageConstraint
+nominal
+
+# m6. virtualMachineVolatility
+nominal
+
+# m7. computerTurnaroundTime
+nominal
+
+##   Personnel Attributes
+# m8. AnalystCapabilities
+nominal
+
+# m9. applicationsExperience
+nominal
+
+# m10. programmerCapability
+nominal
+
+# m11. virtualMachineExperience
+very low
+
+# m12. programmingLanguageExperience
+nominal
+
+##   Project Attributes
+# m13. useOfModernProgrammingPractices
+nominal
+
+# m14. useOfSoftwareTools
+nominal
+
+# m15. requiredDevelopmentSchedule
+nominal
+
+##   Defines how much the specifications of the product are expected to change
+# m16. requirementsVolatility
+nominal
