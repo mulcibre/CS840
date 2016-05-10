@@ -9,7 +9,7 @@ from costDrivers import Drivers
 from getSWParams import SWParams
 
 gccPath = "../projectSpecs/gcc.txt"
-
+linuxKernelPath = "../projectSpecs/linuxkernel.txt"
 #   costDrivers.py contains all the cost drivers, modes, and levels of detail for COCOMO
 drs = Drivers()
 
@@ -51,3 +51,4 @@ def runCOCOMO(pathToConfig):
 
 #   execute calculations
 runCOCOMO(gccPath)
+runCOCOMO(linuxKernelPath)

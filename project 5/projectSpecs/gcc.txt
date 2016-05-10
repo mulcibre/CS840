@@ -16,13 +16,13 @@ organic
 
 ##  Product Attributes (must be very low, low, nominal, high, very high, or extra high)
 # m1. requiredSoftwareReliability
-very low
+very high
 
 # m2. dbSize
-low
+nominal
 
 # m3. productComplexity
-extra high
+high
 
 #   Computer Attributes
 # m4. executionTimeConstraint
@@ -39,19 +39,19 @@ nominal
 
 ##   Personnel Attributes
 # m8. AnalystCapabilities
-nominal
+high
 
 # m9. applicationsExperience
-nominal
+high
 
 # m10. programmerCapability
-nominal
+high
 
 # m11. virtualMachineExperience
-very low
+nominal
 
 # m12. programmingLanguageExperience
-nominal
+high
 
 ##   Project Attributes
 # m13. useOfModernProgrammingPractices

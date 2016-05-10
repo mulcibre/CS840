@@ -1,9 +1,9 @@
 #   Note - parser anchors on comment lines, do NOT edit them
 # Software Name
-vmlinuz-3.19.0-58-generic
+Microsoft Office Excel
 
 # Executable Size (bytes) as measured in Ubuntu 14.04 using command 'ls -lha /boot | grep 3.19.0-58-generic' in /boot
-6606028
+33038528 
 
 # Salary ($ per software enginer per month)
 8333
