@@ -22,3 +22,4 @@ project 3/benchmaker/**/*.cpp
 
 #anything to do with jetbrains idea
 .idea/
+*.pyc

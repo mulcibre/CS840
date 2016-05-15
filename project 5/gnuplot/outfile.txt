@@ -1,0 +1,12 @@
+0,Small Project,Small Project,55211.92,1.29,5.13,2
+1,Intermediate Project,Intermediate Project,236698.69,3.19,8.92,8
+2,Medium Project,Medium Project,1014749.48,7.85,15.50,32
+3,Large Project,Large Project,4350326.25,19.37,26.96,128
+4,Very Large Project,Very Large Project,18650256.93,47.75,46.87,512
+5,GCC compiler,Gcc,884756.67,7.21,14.72,24.7341440235
+6,vmlinuz-3.19.0-58-generic,Linuxkernel,7482224.34,27.11,33.13,222.605492623
+7,Microsoft Office Access,Access,25229106.99,57.59,52.57,708.386550775
+8,Microsoft Office Excel,Excel,41555499.79,78.47,63.55,1139.40106967
+9,Microsoft Office Onenote,Onenote,2256313.59,12.89,21.01,71.0716787946
+10,Microsoft Office Powerpoint,Powerpoint,1819288.50,11.28,19.36,57.8963213718
+11,Microsoft Office Word,Word,1907249.80,11.61,19.71,60.5592513718
