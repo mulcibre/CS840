@@ -52,8 +52,7 @@ class Drivers:
                 mVal *= self.multiplyIfValid(self.requirementsVolatility,settings.requirementsVolatilitySetting,15)
         return mVal
 
-    #   drunk sam is not amused, why is there not a comment describing wtf this does??
-    #   Hari says hi!
+    #   does a check to ensure that a valid driver setting was selected
     def multiplyIfValid(self,driverArr, setting, index):
         if driverArr[setting] == 0:
             print "Invalid setting for m" + str(index)

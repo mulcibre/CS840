@@ -2,7 +2,7 @@
 from subprocess import call
 import os
 
-pathToPlotter = ["../gnuplot/","barplot.plt"]
+pathToPlotter = ["../gnuplot/","scatterplot.plt"]
 origDir = "original/"
 
 ###
@@ -25,17 +25,17 @@ def editPlotFile(plotFileLines, pngName, title, ylabel, dataCol):
     cursor = [0]
 
     #   Set name of output png
-    lineNo = getLineOfData(plotFileLines, cursor, "define output")
-    plotFileLines[lineNo + 1] = "".join(['set output "pngout/', pngName, 'barplot.png"\n'])
+    lineNo = getLineOfData(plotFileLines, cursor, "define output console")
+    plotFileLines[lineNo + 1] = "".join(['set output "pngout/', pngName, 'vsKLLOCscatter.png"\n'])
 
-    #   Set title and ylabel of plot
-    lineNo = getLineOfData(plotFileLines, cursor, "set title, labels, key position")
+    #   Set title and axis labels of plot
+    lineNo = getLineOfData(plotFileLines, cursor, "set title, axis labels")
     plotFileLines[lineNo] = "".join(['set title "', title, '"\n'])
-    plotFileLines[lineNo + 1] = "".join(['set ylabel "<-- ', ylabel, ' -->"\n'])
+    plotFileLines[lineNo + 2] = "".join(['set ylabel "<-- ', ylabel, ' -->"\n'])
 
     #   set data to use
-    lineNo = getLineOfData(plotFileLines, cursor, "plot barplot")
-    plotFileLines[lineNo + 1] = "".join(['1:', str(dataCol), ':xtic(3) \\\n'])
+    lineNo = getLineOfData(plotFileLines, cursor, "plot scatterplot")
+    plotFileLines[lineNo + 1] = "".join(['7:', str(dataCol), ' \\\n'])
 
 def genPlot(pngName, title, ylabel, dataCol):
     #   open backup read file to avoid destruction by writing
@@ -47,14 +47,14 @@ def genPlot(pngName, title, ylabel, dataCol):
     editPlotFile(plotData, pngName, title, ylabel, dataCol)
 
     #   write lines back to appropriate plot file in gnuplot directory
-    with open("".join([pathToPlotter[0],pngName,".plt"]), 'w') as file:
+    with open("".join([pathToPlotter[0],pngName,"scatter.plt"]), 'w') as file:
         #   write back to gnuplot file
         file.writelines(plotData)
 
     #   Switch to working dir to /Gnuplot, and run gnuplot on appropriate plot file
     CWD = os.getcwd()
     os.chdir(os.path.join(CWD, pathToPlotter[0]))
-    call(["gnuplot", "".join([pngName,".plt"])])
+    call(["gnuplot", "".join([pngName,"scatter.plt"])])
 
     #   return to original directory
     os.chdir(CWD)
@@ -66,4 +66,3 @@ def genPlot(pngName, title, ylabel, dataCol):
 genPlot("cost", "Cost Required for Project", "Cost ($)", "4")
 genPlot("staff", "Staff Required for Project", "Staff", "5")
 genPlot("time", "Development Time Required for Project", "Time (Months)", "6")
-genPlot("KLLOC", "Project KLLOC", "KLLOC", "7")
