@@ -4,20 +4,26 @@
 int programBodyCounters[6] = { 0 };
 
 
+
+#include <iostream>
+
 using namespace std;
 
 int main()
 {
 programBodyCounters[0]++;
 
+
 	for (int i = 1; i <= 100; i++)
 	{
 programBodyCounters[1]++;
 
+	
 		if (!(i % 3) && !(i % 5))
 		{
 programBodyCounters[2]++;
 
+			
 			cout << "fizzbuzz\n";
 		}
 		else if (!(i % 3))

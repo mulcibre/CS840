@@ -1,8 +1,24 @@
 import re
+from subprocess import call
+import os
 
 #   open source file for reading
 pathToSource = ["../cpp/fizbuz/fizbuz/","source.cpp"]
 outfileName = "fizbuzout.txt"
+
+def buildAndRunExe():
+    #   change working directory to location of source file
+    CWD = os.getcwd()
+    os.chdir(os.path.join(CWD, pathToSource[0]))
+
+    #   set up the required environment for compiling and linking, then compile
+    call(["vcvars32.bat", "&&", "cl.exe" ,"/EHsc", "".join(["instrumented", pathToSource[1]])])
+
+    #   run resulting executable
+    call(["".join(["instrumented",pathToSource[1][:-4],".exe"])])
+
+    #   return to original directory
+    os.chdir(CWD)
 
 def addStreamLibs(sourceData):
     #   make sure required libraries
@@ -91,3 +107,5 @@ with open("".join([pathToSource[0], pathToSource[1]]), 'r') as file:
     with open("".join([pathToSource[0], "instrumented", pathToSource[1]]), 'w') as file:
         #   write back to gnuplot file
         file.writelines(sourceData)
+
+    buildAndRunExe()
