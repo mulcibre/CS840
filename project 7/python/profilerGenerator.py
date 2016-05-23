@@ -1,9 +1,11 @@
 import re
 from subprocess import call
 import os
+import sys
 
 #   open source file for reading
 pathToSource = ["../cpp/fizbuz/fizbuz/","source.cpp"]
+pathToOutfile = "../outfiles/"
 outfileName = "fizbuzout.txt"
 
 def buildAndRunExe():
@@ -14,8 +16,8 @@ def buildAndRunExe():
     #   set up the required environment for compiling and linking, then compile
     call(["vcvars32.bat", "&&", "cl.exe" ,"/EHsc", "".join(["instrumented", pathToSource[1]])])
 
-    #   run resulting executable
-    call(["".join(["instrumented",pathToSource[1][:-4],".exe"])])
+    #   run resulting executable, slice extension and change to exe
+    call(["".join(["instrumented",pathToSource[1][:-3],"exe"])])
 
     #   return to original directory
     os.chdir(CWD)
@@ -72,7 +74,7 @@ def addOutfilePrint(sourceData, outfileName):
                         'int arraySize = sizeof(programBodyCounters) / sizeof(int);',
                         'for (int i = 0; i < arraySize - 1; i++)',
                         '{',
-                        'outfile << programBodyCounters[i] << ", ";',
+                        'outfile << programBodyCounters[i] << ",";',
                         '}',
                         'outfile << programBodyCounters[arraySize - 1];',
                         'outfile.close();'])
@@ -84,7 +86,7 @@ def addOutfilePrint(sourceData, outfileName):
     return sourceData
 
 with open("".join([pathToSource[0], pathToSource[1]]), 'r') as file:
-    # read a list of lines into source code
+    # read source code into string
     sourceData = file.read()
 
     numLeftCurlies = sourceData.count('{')
@@ -109,3 +111,44 @@ with open("".join([pathToSource[0], pathToSource[1]]), 'r') as file:
         file.writelines(sourceData)
 
     buildAndRunExe()
+
+#   load block run counts
+with open("".join([pathToOutfile, outfileName]), 'r') as file:
+    #   Read source code into string
+    sourceData = file.readlines()
+    runCounts = sourceData[0].split(",")
+
+    runCountStack = []
+
+    #   Print source code, annotated with run counts when applicable
+    with open("".join([pathToSource[0], pathToSource[1]]), 'r') as file:
+        # read source code into string
+        sourceData = file.read()
+
+        print "\nLLOC runcount for original sourcecode below:\n"
+        printBuf = ""
+        #   only print runcount if state is 1
+        state = 0
+
+        for i in sourceData:
+            if i == '{':
+                #   Add new scope run count to stack
+                runCountStack.append(runCounts[0])
+                runCounts.pop(0)
+            elif i == '}':
+                runCountStack.pop()
+            elif i == ';':
+                #   if we read a LLOC, print the run count
+                state = 1
+            elif i == '\n':
+                if state == 1 and runCountStack:
+                    printBuf += "".join(['\t', "// Ran ", runCountStack[-1], ' times'])
+                    sys.stdout.write(printBuf)
+                    state = 0
+                    printBuf = ""
+                else:
+                    sys.stdout.write(printBuf)
+                    printBuf = ""
+                    state = 0
+            printBuf += i
+        sys.stdout.write(printBuf)
