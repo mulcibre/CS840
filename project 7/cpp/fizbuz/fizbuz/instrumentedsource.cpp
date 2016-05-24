@@ -1,9 +1,7 @@
 
 #include <iostream>
 #include <fstream>
-int programBodyCounters[6] = { 0 };
-
-
+long long programBodyCounters[6] = { 0 };
 
 using namespace std;
 
@@ -41,13 +39,13 @@ programBodyCounters[5]++;
 	}
 
 ofstream outfile;
-outfile.open("../../../outfiles/fizbuzout.txt");
-int arraySize = sizeof(programBodyCounters) / sizeof(int);
-for (int i = 0; i < arraySize - 1; i++)
+outfile.open("../../../outfiles/fizbuzoutput.txt");
+int codeExecCounterArraySize = sizeof(programBodyCounters) / sizeof(long long);
+for (int i = 0; i < codeExecCounterArraySize - 1; i++)
 {
 outfile << programBodyCounters[i] << ",";
 }
-outfile << programBodyCounters[arraySize - 1];
+outfile << programBodyCounters[codeExecCounterArraySize - 1];
 outfile.close();
 
 	return 0;
