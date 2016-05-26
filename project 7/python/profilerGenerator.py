@@ -74,7 +74,7 @@ def addOutfilePrint(sourceData, pathToSource, outfileName):
                         'int codeExecCounterArraySize = sizeof(programBodyCounters) / sizeof(long long);',
                         'for (int i = 0; i < codeExecCounterArraySize - 1; i++)',
                         '{',
-                        'outfile << programBodyCounters[i] << ",";',
+                        'outfile << programBodyCounters[i] << "\\n";',
                         '}',
                         'outfile << programBodyCounters[codeExecCounterArraySize - 1];',
                         'outfile.close();'])
@@ -88,8 +88,8 @@ def addOutfilePrint(sourceData, pathToSource, outfileName):
 def displayProfilerOutput(sourceData, runCounts):
     print "\nLLOC runcount for original sourcecode below:\n"
     printBuf = ""
-    #   only print runcount if state is 1
-    state = 0
+    #   only print runcount if isLLOC is 1
+    isLLOC = 0
     runCountStack = []
 
     for i in sourceData:
@@ -101,26 +101,27 @@ def displayProfilerOutput(sourceData, runCounts):
             runCountStack.pop()
         elif i == ';':
             #   if we read a LLOC, print the run count
-            state = 1
+            isLLOC = 1
         elif i == '\n':
-            if state == 1 and runCountStack:
+            if isLLOC == 1 and runCountStack:
                 printBuf += "".join(['\t', "// Ran ", runCountStack[-1], ' times'])
                 sys.stdout.write(printBuf)
-                state = 0
+                isLLOC = 0
                 printBuf = ""
             else:
                 sys.stdout.write(printBuf)
                 printBuf = ""
-                state = 0
+                isLLOC = 0
         printBuf += i
-    sys.stdout.write(printBuf)
+    #   output remainder of program
+    print printBuf
 
 def profilerOutput(pathToSource, outfileName):
     #   load block run counts
     with open("".join(["../outfiles/", outfileName]), 'r') as file:
-        #   Read source code into string
-        sourceData = file.readlines()
-        runCounts = sourceData[0].split(",")
+        #   Read outfile into string, split to get counters
+        outfile = file.read()
+        runCounts = outfile.split("\n")
 
         #   Print source code, annotated with run counts when applicable
         with open("".join([pathToSource[0], pathToSource[1]]), 'r') as file:

@@ -43,7 +43,7 @@ outfile.open("../../../outfiles/fizbuzoutput.txt");
 int codeExecCounterArraySize = sizeof(programBodyCounters) / sizeof(long long);
 for (int i = 0; i < codeExecCounterArraySize - 1; i++)
 {
-outfile << programBodyCounters[i] << ",";
+outfile << programBodyCounters[i] << "\n";
 }
 outfile << programBodyCounters[codeExecCounterArraySize - 1];
 outfile.close();
